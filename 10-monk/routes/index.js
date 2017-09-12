@@ -1,7 +1,7 @@
-var express = require('express');
-var router = express.Router();
-var db = require('monk')('localhost:27017/test');
-var userData  = db.get('userdata');
+const express = require('express');
+const router = express.Router();
+const db = require('monk')('localhost:27017/test');
+const userData  = db.get('userdata');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -17,7 +17,7 @@ router.get('/get-data', function(req, res, next) {
 });
 
 router.post('/insert', function(req, res, next) {
-    var item = {
+    let item = {
         title: req.body.title,
         content: req.body.content,
         author: req.body.author
@@ -29,18 +29,18 @@ router.post('/insert', function(req, res, next) {
 });
 
 router.post('/update', function(req, res, next) {
-    var item = {
+    let item = {
         title: req.body.title,
         content: req.body.content,
         author: req.body.author
     };
-    var id = req.body.id;
+    let id = req.body.id;
     userData.update(id, item);
     res.redirect('/');
 });
 
 router.post('/delete', function(req, res, next) {
-    var id = req.body.id;
+    let id = req.body.id;
     userData.remove(id)
     res.redirect('/');
 });

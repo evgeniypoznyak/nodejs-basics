@@ -1,9 +1,9 @@
-var express = require('express');
-var router = express.Router();
-var mongo = require('mongodb').MongoClient;
-var objectId = require('mongodb').ObjectID;
-var assert = require('assert');
-var url = 'mongodb://localhost:27017/test'
+const express = require('express');
+const router = express.Router();
+const mongo = require('mongodb').MongoClient;
+const objectId = require('mongodb').ObjectID;
+const assert = require('assert');
+const url = 'mongodb://localhost:27017/test'
 
 /* GET home page. */
 router.get('/', function (req, res, next) {
@@ -11,10 +11,10 @@ router.get('/', function (req, res, next) {
 });
 
 router.get('/get-data', function (req, res, next) {
-    var resultArray = [];
+    let resultArray = [];
     mongo.connect(url, function (err, db) {
         assert.equal(null, err);
-        var cursor = db.collection('userdata').find();
+        let cursor = db.collection('userdata').find();
         cursor.forEach((doc, err) => {
             assert.equal(err, null);
             resultArray.push(doc);
@@ -26,7 +26,7 @@ router.get('/get-data', function (req, res, next) {
 });
 
 router.post('/insert', function (req, res, next) {
-    var item = {
+    let item = {
         title: req.body.title,
         content: req.body.content,
         author: req.body.author
@@ -45,12 +45,12 @@ router.post('/insert', function (req, res, next) {
 });
 router.post('/update', function (req, res, next) {
 
-    var item = {
+    let item = {
         title: req.body.title,
         content: req.body.content,
         author: req.body.author
     }
-    var id = req.body.id;
+    let id = req.body.id;
 
     mongo.connect(url, function (err, db) {
         assert.equal(null, err);
@@ -63,7 +63,7 @@ router.post('/update', function (req, res, next) {
     res.redirect('/');
 });
 router.post('/delete', function (req, res, next) {
-    var id = req.body.id;
+    let id = req.body.id;
 
     mongo.connect(url, function (err, db) {
         assert.equal(null, err);
